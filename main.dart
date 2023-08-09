@@ -26,9 +26,36 @@ void main() {
     if (sugestao < minimo || sugestao > maximo) {
       print('-----------------------------------------------------');
       print(
-          'O NÚMERO QUE VOCÊ DEU COMO SUGESTÃO, É FORA DOS PARAMETROS DA QUANTIDADE QUE VOCÊ ESTABELECEU COMO LIMITE');
+          'ME DEPAREI QUE SUA RESPOSTA ESTÁ FORA DOS PARAMETROS DAS QUANTIDADES ESTABELECIDAS ANTERIORMENTE: ');
+      print('');
+      print('1 - DESEJA CONTINUAR COM OS MESMOS VALORES?: ');
+      print('2 - DESEJA REDEFINIR NOVOS VALORES?: ');
+      print('3 - DESEJA ENCERRAR O PROGRAMA?: ');
+
+      int receptor = pedirNumero('');
+
+      switch (receptor) {
+        case 1:
+          break;
+
+        case 2:
+          minimo = pedirNumero('ESCOLHA UM NÚMERO MÍNIMO: ');
+          maximo = pedirNumero('ESCOLHA UM NÚMERO MÁXIMO: ');
+          sorteado = Random().nextInt(maximo + 1);
+          if (sorteado < minimo) {
+            sorteado = minimo;
+          }
+          break;
+
+        case 3:
+          querContinuar = false;
+          break;
+
+        default:
+      }
     } else {
       if (sugestao == sorteado) {
+        print('');
         print('O número escolhido foi: $sorteado');
         print('-----------------------------------------------------');
 
@@ -40,10 +67,10 @@ void main() {
             'O número escolhido por você é MENOR do que o numero ESCOLHIDO !!!',
           );
         } else if (sugestao > sorteado) {
-          print ('-----------------------------------------------------');
+          print('-----------------------------------------------------');
           print('o número que você digitou é MAIOR que o número ESCOLHIDO !!!');
         }
-
+        print('-----------------------------------------------------');
         print('VOCÊ DESEJA CONTINUAR? (sim/ não)');
         String resposta = stdin.readLineSync() ?? 'NÃO';
 
@@ -51,11 +78,11 @@ void main() {
           querContinuar = false;
         }
       }
-
-      print('');
-      print('-----------------------------------------------------');
-      print('SEU CÓDIGO RODOU BEM, CASO PREFERIR, TENTE NOVAMENTE!');
-      print('');
     }
   }
+
+  print('');
+  print('-----------------------------------------------------');
+  print('SEU CÓDIGO RODOU BEM, CASO PREFERIR, TENTE NOVAMENTE!');
+  print('');
 }
