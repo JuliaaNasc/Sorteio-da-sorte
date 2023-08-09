@@ -1,61 +1,47 @@
 import 'dart:io';
 import 'dart:math';
 
+import 'funcoes/pedir_numero.dart';
+
 void main() {
   print('VENHA PARTICIPAR DA NOSSA BRINCADEIRA... ');
   print('-----------------------------------------------------');
   print('');
 
-  print('ESCOLHA UM NÚMERO MÍNIMO: ');
-  String minimo = stdin.readLineSync() ?? '1';
-  int novoMinimo = int.parse(minimo);
+  int minimo = pedirNumero('ESCOLHA UM NÚMERO MÍNIMO: ');
 
-  print('AGORA ESCOLHA O VALOR MÁXIMO: ');
-  String maximo = stdin.readLineSync() ?? '1';
-  int novoMaximo = int.parse(maximo);
+  int maximo = pedirNumero('AGORA ESCOLHA O VALOR MÁXIMO: ');
 
-  int sorteado = Random().nextInt(novoMaximo + 1);
-  if (sorteado < novoMinimo) {
-    sorteado = novoMinimo;
+  int sorteado = Random().nextInt(maximo + 1);
+  if (sorteado < minimo) {
+    sorteado = minimo;
   }
   bool acertou = false;
   bool querContinuar = true;
 
   while (!acertou && querContinuar) {
-    print('ME FALE UM NOVO VALOR EM NÚMERO COMO SUGESTÃO:  ');
-    String sugestao = stdin.readLineSync() ?? '1';
-    int novaSugestao = int.parse(sugestao);
+    int sugestao =
+        pedirNumero('ME FALE UM NOVO VALOR EM NÚMERO COMO SUGESTÃO:  ');
 
-    print('');
-
-    if (novaSugestao < novoMinimo) {
-      print(
-          'O NÚMERO QUE O USUÁRIO ESCOLHEU, É MENOR DO QUE O NÚMERO ESTABELECIDO COMO MINÍMO');
+    if (sugestao < minimo || sugestao > maximo) {
       print('-----------------------------------------------------');
       print(
-          'SEU CODÍGO NÃO RODOU POR UM ERRO NO VALOR ESTABELECIDO COMO SUGESTÃO!');
-      print('');
-    } else if (novaSugestao > novoMaximo) {
-      print(
-          'O NÚMERO QUE O USUÁRIO ESCOLHEU, É MAIOR DO QUE O NÚMERO ESTABELECIDO COMO MAXÍMO');
-      print('-----------------------------------------------------');
-      print(
-          'SEU CODÍGO NÃO RODOU POR UM ERRO NO VALOR ESTABELECIDO COMO SUGESTÃO!');
-      print('');
+          'O NÚMERO QUE VOCÊ DEU COMO SUGESTÃO, É FORA DOS PARAMETROS DA QUANTIDADE QUE VOCÊ ESTABELECEU COMO LIMITE');
     } else {
-      if (novaSugestao == sorteado) {
+      if (sugestao == sorteado) {
         print('O número escolhido foi: $sorteado');
         print('-----------------------------------------------------');
 
         print('VOCÊ DIGITOU O NÚMERO ESCOLHIDO!!!');
         acertou = true;
       } else {
-        if (novaSugestao < sorteado) {
+        if (sugestao < sorteado) {
           print(
-            'O número escolhido por você é menor do que o numero ESCOLHIDO no programa !!!',
+            'O número escolhido por você é MENOR do que o numero ESCOLHIDO !!!',
           );
-        } else if (novaSugestao > sorteado) {
-          print('o número que você digitou é maior que o número ESCOLHIDO !!!');
+        } else if (sugestao > sorteado) {
+          print ('-----------------------------------------------------');
+          print('o número que você digitou é MAIOR que o número ESCOLHIDO !!!');
         }
 
         print('VOCÊ DESEJA CONTINUAR? (sim/ não)');
@@ -66,6 +52,7 @@ void main() {
         }
       }
 
+      print('');
       print('-----------------------------------------------------');
       print('SEU CÓDIGO RODOU BEM, CASO PREFERIR, TENTE NOVAMENTE!');
       print('');
