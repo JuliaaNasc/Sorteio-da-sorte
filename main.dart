@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'dart:math';
 
+import 'funcoes/mostrar_menu.dart';
 import 'funcoes/pedir_numero.dart';
 
 void main() {
@@ -24,17 +25,10 @@ void main() {
         pedirNumero('ME FALE UM NOVO VALOR EM NÚMERO COMO SUGESTÃO:  ');
 
     if (sugestao < minimo || sugestao > maximo) {
-      print('-----------------------------------------------------');
-      print(
-          'ME DEPAREI QUE SUA RESPOSTA ESTÁ FORA DOS PARAMETROS DAS QUANTIDADES ESTABELECIDAS ANTERIORMENTE: ');
-      print('');
-      print('1 - DESEJA CONTINUAR COM OS MESMOS VALORES?: ');
-      print('2 - DESEJA REDEFINIR NOVOS VALORES?: ');
-      print('3 - DESEJA ENCERRAR O PROGRAMA?: ');
 
-      int receptor = pedirNumero('');
+      int resultadoMostrarMenu = mostrarMenu();
 
-      switch (receptor) {
+      switch (resultadoMostrarMenu) {
         case 1:
           break;
 
