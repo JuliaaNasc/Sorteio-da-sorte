@@ -20,12 +20,18 @@ void main() {
   bool acertou = false;
   bool querContinuar = true;
 
+  List<int> numerosSugeridos = [];
+
   while (!acertou && querContinuar) {
     int sugestao =
         pedirNumero('ME FALE UM NOVO VALOR EM NÚMERO COMO SUGESTÃO:  ');
 
-    if (sugestao < minimo || sugestao > maximo) {
+    if (numerosSugeridos.contains(sugestao)) {
+      print('ESSE NÚMERO JÁ FOI INSERIDO ANTERIOMENTE...');
+    }
+    numerosSugeridos.add(sugestao);
 
+    if (sugestao < minimo || sugestao > maximo) {
       int resultadoMostrarMenu = mostrarMenu();
 
       switch (resultadoMostrarMenu) {
