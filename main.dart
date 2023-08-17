@@ -1,37 +1,34 @@
 import 'dart:io';
 import 'dart:math';
 
+import 'funcoes/criarcao_de_partida.dart';
 import 'funcoes/mostrar_menu.dart';
 import 'funcoes/pedir_numero.dart';
+import 'modelos/partida.dart';
 
 void main() {
   print('VENHA PARTICIPAR DA NOSSA BRINCADEIRA... ');
   print('-----------------------------------------------------');
   print('');
 
-  int minimo = pedirNumero('ESCOLHA UM NÚMERO MÍNIMO: ');
 
-  int maximo = pedirNumero('AGORA ESCOLHA O VALOR MÁXIMO: ');
 
-  int sorteado = Random().nextInt(maximo + 1);
-  if (sorteado < minimo) {
-    sorteado = minimo;
-  }
+  Partida partida = criacaoPartida();
+
+
   bool acertou = false;
   bool querContinuar = true;
-
-  List<int> numerosSugeridos = [];
 
   while (!acertou && querContinuar) {
     int sugestao =
         pedirNumero('ME FALE UM NOVO VALOR EM NÚMERO COMO SUGESTÃO:  ');
 
-    if (numerosSugeridos.contains(sugestao)) {
+    if (partida.numerosSugeridos.contains(sugestao)) {
       print('ESSE NÚMERO JÁ FOI INSERIDO ANTERIOMENTE...');
     }
-    numerosSugeridos.add(sugestao);
+    partida.numerosSugeridos.add(sugestao);
 
-    if (sugestao < minimo || sugestao > maximo) {
+    if (sugestao < partida.minimo || sugestao > partida.maximo) {
       int resultadoMostrarMenu = mostrarMenu();
 
       switch (resultadoMostrarMenu) {
@@ -39,11 +36,11 @@ void main() {
           break;
 
         case 2:
-          minimo = pedirNumero('ESCOLHA UM NÚMERO MÍNIMO: ');
-          maximo = pedirNumero('ESCOLHA UM NÚMERO MÁXIMO: ');
-          sorteado = Random().nextInt(maximo + 1);
-          if (sorteado < minimo) {
-            sorteado = minimo;
+          partida.minimo = pedirNumero('ESCOLHA UM NÚMERO MÍNIMO: ');
+          partida.maximo = pedirNumero('ESCOLHA UM NÚMERO MÁXIMO: ');
+          partida.sorteado = Random().nextInt(partida.maximo + 1);
+          if (partida.sorteado < partida.minimo) {
+            partida.sorteado = partida.minimo;
           }
           break;
 
@@ -54,19 +51,19 @@ void main() {
         default:
       }
     } else {
-      if (sugestao == sorteado) {
+      if (sugestao == partida.sorteado) {
         print('');
-        print('O número escolhido foi: $sorteado');
+        print('O número escolhido foi: ${partida.sorteado} ');
         print('-----------------------------------------------------');
 
         print('VOCÊ DIGITOU O NÚMERO ESCOLHIDO!!!');
         acertou = true;
       } else {
-        if (sugestao < sorteado) {
+        if (sugestao < partida.sorteado) {
           print(
             'O número escolhido por você é MENOR do que o numero ESCOLHIDO !!!',
           );
-        } else if (sugestao > sorteado) {
+        } else if (sugestao > partida.sorteado) {
           print('-----------------------------------------------------');
           print('o número que você digitou é MAIOR que o número ESCOLHIDO !!!');
         }
