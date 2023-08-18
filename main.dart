@@ -10,10 +10,6 @@ void main() {
   print('-----------------------------------------------------');
   print('');
 
-
-  print('-----------------------------------------------------');
-  print('');
-
   List<Partida> historicoPartidas = [];
 
   Partida partida = criarPartida();

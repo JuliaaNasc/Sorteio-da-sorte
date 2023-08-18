@@ -10,6 +10,7 @@ void mostrarHistorico(List<Partida> historico) {
     print('MÁXIMO: ${partida.maximo}');
     print('SORTEADO: ${partida.sorteado}');
     print('NÚMERO DE SUGESTÕES: ${partida.numerosSugeridos.length}');
+    print('NOME DO USUÁRIO: ${partida.nomeUsuario}');
   }
     print('---------------------------------------------------------------');
     print('');

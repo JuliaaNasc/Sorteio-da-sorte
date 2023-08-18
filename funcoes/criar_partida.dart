@@ -8,6 +8,7 @@ Partida criarPartida() {
 
  print('INFORME O SEU NOME: ');
   String nomeUsuario = stdin.readLineSync() ?? '1';
+  print('-------------------------------------------------------');
 
   int minimo = pedirNumero('ESCOLHA UM NÚMERO MÍNIMO: ');
 
@@ -22,6 +23,6 @@ Partida criarPartida() {
     maximo: maximo,
     sorteado: sorteado,
     numerosSugeridos: [],
-    nomeUsuario: nomeUsuario,
+    nomeUsuario: nomeUsuario.toUpperCase(),
   );
 }
