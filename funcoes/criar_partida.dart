@@ -1,9 +1,14 @@
+import 'dart:io';
 import 'dart:math';
 
 import '../modelos/partida.dart';
 import 'pedir_numero.dart';
 
 Partida criarPartida() {
+
+ print('INFORME O SEU NOME: ');
+  String nomeUsuario = stdin.readLineSync() ?? '1';
+
   int minimo = pedirNumero('ESCOLHA UM NÚMERO MÍNIMO: ');
 
   int maximo = pedirNumero('AGORA ESCOLHA O VALOR MÁXIMO: ');
@@ -17,5 +22,6 @@ Partida criarPartida() {
     maximo: maximo,
     sorteado: sorteado,
     numerosSugeridos: [],
+    nomeUsuario: nomeUsuario,
   );
 }
