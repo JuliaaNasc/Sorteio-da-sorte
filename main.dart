@@ -10,6 +10,11 @@ void main() {
   print('-----------------------------------------------------');
   print('');
 
+  print('INFORME O SEU NOME: ');
+  String nomeUsuario = stdin.readLineSync() ?? '1';
+  print('-----------------------------------------------------');
+  print('');
+
   List<Partida> historicoPartidas = [];
 
   Partida partida = criarPartida();
@@ -17,24 +22,25 @@ void main() {
   bool querContinuar = true;
 
   while (querContinuar) {
-    int sugestao =
-        pedirNumero('ME FALE UM NOVO VALOR EM NÚMERO COMO SUGESTÃO:  ');
+    int sugestao = pedirNumero(
+        'ME FALE UM NOVO VALOR EM NÚMERO COMO SUGESTÃO, ${nomeUsuario}:  ');
 
     if (partida.numerosSugeridos.contains(sugestao)) {
-      print('ESSE NÚMERO JÁ FOI INSERIDO ANTERIOMENTE...');
+      print('ESSE NÚMERO JÁ FOI INSERIDO ANTERIOMENTE, ${nomeUsuario}...');
     }
 
     partida.numerosSugeridos.add(sugestao);
 
     print('');
     print('-----------------------------------------------------');
-    print('TENTATIVA: ${partida.numerosSugeridos.length}');
+    print(
+        '${nomeUsuario}, ESSA É A TENTATIVA: ${partida.numerosSugeridos.length}');
     print('-----------------------------------------------------');
     print('');
 
     if (sugestao < partida.minimo || sugestao > partida.maximo) {
       print(
-          'VERIFIQUEI QUE O NÚMERO QUE VOCÊ COLOCOU ESTÁ FORA DOS PARAMETROS ESTABELECIDOS...');
+          'VERIFIQUEI QUE O NÚMERO QUE VOCÊ ${nomeUsuario} COLOCOU ESTÁ FORA DOS PARAMETROS ESTABELECIDOS...');
       print('-----------------------------------------------------');
       int resultadoMostrarMenu = mostrarMenu([
         'SE DESEJA CONTINUAR',
@@ -64,7 +70,7 @@ void main() {
         print('O número escolhido foi: ${partida.sorteado} ');
         print('-----------------------------------------------------');
 
-        print('VOCÊ DIGITOU O NÚMERO ESCOLHIDO!!!');
+        print('${nomeUsuario} DIGITOU O NÚMERO ESCOLHIDO!!!');
         print('');
 
         int menufinal = mostrarMenu([
@@ -87,11 +93,10 @@ void main() {
                 partida = criarPartida();
                 break;
 
-                case 2: 
+              case 2:
                 querContinuar = false;
                 break;
             }
-
 
             break;
           case 2:
@@ -107,11 +112,12 @@ void main() {
       } else {
         if (sugestao < partida.sorteado) {
           print(
-            'O número escolhido por você é MENOR do que o numero ESCOLHIDO !!!',
+            ' ${nomeUsuario}, O número escolhido por você é MENOR do que o numero ESCOLHIDO !!!',
           );
         } else if (sugestao > partida.sorteado) {
           print('-----------------------------------------------------');
-          print('o número que você digitou é MAIOR que o número ESCOLHIDO !!!');
+          print(
+              '${nomeUsuario}, o número que você digitou é MAIOR que o número ESCOLHIDO !!!');
         }
         print('-------------------------------------------------------');
         print('VOCÊ DESEJA CONTINUAR? (sim/ não)');
@@ -128,6 +134,7 @@ void main() {
 
   print('');
   print('-----------------------------------------------------');
-  print('SEU CÓDIGO RODOU BEM, CASO PREFERIR, TENTE NOVAMENTE!');
+  print(
+      'SEU CÓDIGO RODOU BEM, ${nomeUsuario}, CASO PREFERIR, TENTE NOVAMENTE!');
   print('');
 }
