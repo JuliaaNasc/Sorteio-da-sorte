@@ -3,7 +3,7 @@ import 'dart:math';
 import '../modelos/partida.dart';
 import 'pedir_numero.dart';
 
-Partida criacaoPartida() {
+Partida criarPartida() {
   int minimo = pedirNumero('ESCOLHA UM NÚMERO MÍNIMO: ');
 
   int maximo = pedirNumero('AGORA ESCOLHA O VALOR MÁXIMO: ');

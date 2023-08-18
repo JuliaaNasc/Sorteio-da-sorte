@@ -1,5 +1,6 @@
 import 'dart:io';
-import 'funcoes/criarcao_de_partida.dart';
+import 'funcoes/criar_partida.dart';
+import 'funcoes/mostrar_historico.dart';
 import 'funcoes/mostrar_menu.dart';
 import 'funcoes/pedir_numero.dart';
 import 'modelos/partida.dart';
@@ -11,12 +12,11 @@ void main() {
 
   List<Partida> historicoPartidas = [];
 
-  Partida partida = criacaoPartida();
+  Partida partida = criarPartida();
 
-  bool acertou = false;
   bool querContinuar = true;
 
-  while (!acertou && querContinuar) {
+  while (querContinuar) {
     int sugestao =
         pedirNumero('ME FALE UM NOVO VALOR EM NÚMERO COMO SUGESTÃO:  ');
 
@@ -36,20 +36,18 @@ void main() {
       print(
           'VERIFIQUEI QUE O NÚMERO QUE VOCÊ COLOCOU ESTÁ FORA DOS PARAMETROS ESTABELECIDOS...');
       print('-----------------------------------------------------');
-      int resultadoMostrarMenu = mostrarMenu(
-        [
-          'SE DESEJA CONTINUAR',
-          'SE DESEJA REDEFINIR OS VALORES',
-          'SE DESEJA PARAR'
-        ],
-      );
+      int resultadoMostrarMenu = mostrarMenu([
+        'SE DESEJA CONTINUAR',
+        'SE DESEJA REDEFINIR OS VALORES',
+        'SE DESEJA PARAR',
+      ]);
 
       switch (resultadoMostrarMenu) {
         case 1:
           break;
 
         case 2:
-          partida = criacaoPartida();
+          partida = criarPartida();
           break;
 
         case 3:
@@ -67,7 +65,45 @@ void main() {
         print('-----------------------------------------------------');
 
         print('VOCÊ DIGITOU O NÚMERO ESCOLHIDO!!!');
-        acertou = true;
+        print('');
+
+        int menufinal = mostrarMenu([
+          'VOCÊ DESEJA CONSULTAR O HISTÓRICO? :',
+          'VOCÊ DESEJA CRIAR UMA NOVA PARTIDA? :',
+          'VOCÊ DESEJA PARAR COM O JOGO? :',
+        ]);
+
+        switch (menufinal) {
+          case 1:
+            mostrarHistorico(historicoPartidas);
+
+            int mostrarMenuSecundario = mostrarMenu([
+              'VOCÊ DESEJA CRIAR UMA NOVA PARTIDA? :',
+              'VOCÊ DESEJA PARAR COM O JOGO? :',
+            ]);
+
+            switch (mostrarMenuSecundario) {
+              case 1:
+                partida = criarPartida();
+                break;
+
+                case 2: 
+                querContinuar = false;
+                break;
+            }
+
+
+            break;
+          case 2:
+            partida = criarPartida();
+            break;
+
+          case 3:
+            querContinuar = false;
+            break;
+
+          default:
+        }
       } else {
         if (sugestao < partida.sorteado) {
           print(
@@ -77,7 +113,7 @@ void main() {
           print('-----------------------------------------------------');
           print('o número que você digitou é MAIOR que o número ESCOLHIDO !!!');
         }
-        print('-----------------------------------------------------');
+        print('-------------------------------------------------------');
         print('VOCÊ DESEJA CONTINUAR? (sim/ não)');
         String resposta = stdin.readLineSync() ?? 'NÃO';
 
