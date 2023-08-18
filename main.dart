@@ -1,6 +1,4 @@
 import 'dart:io';
-import 'dart:math';
-
 import 'funcoes/criarcao_de_partida.dart';
 import 'funcoes/mostrar_menu.dart';
 import 'funcoes/pedir_numero.dart';
@@ -11,10 +9,9 @@ void main() {
   print('-----------------------------------------------------');
   print('');
 
-
+  List<Partida> historicoPartidas = [];
 
   Partida partida = criacaoPartida();
-
 
   bool acertou = false;
   bool querContinuar = true;
@@ -26,22 +23,33 @@ void main() {
     if (partida.numerosSugeridos.contains(sugestao)) {
       print('ESSE NÚMERO JÁ FOI INSERIDO ANTERIOMENTE...');
     }
+
     partida.numerosSugeridos.add(sugestao);
 
+    print('');
+    print('-----------------------------------------------------');
+    print('TENTATIVA: ${partida.numerosSugeridos.length}');
+    print('-----------------------------------------------------');
+    print('');
+
     if (sugestao < partida.minimo || sugestao > partida.maximo) {
-      int resultadoMostrarMenu = mostrarMenu();
+      print(
+          'VERIFIQUEI QUE O NÚMERO QUE VOCÊ COLOCOU ESTÁ FORA DOS PARAMETROS ESTABELECIDOS...');
+      print('-----------------------------------------------------');
+      int resultadoMostrarMenu = mostrarMenu(
+        [
+          'SE DESEJA CONTINUAR',
+          'SE DESEJA REDEFINIR OS VALORES',
+          'SE DESEJA PARAR'
+        ],
+      );
 
       switch (resultadoMostrarMenu) {
         case 1:
           break;
 
         case 2:
-          partida.minimo = pedirNumero('ESCOLHA UM NÚMERO MÍNIMO: ');
-          partida.maximo = pedirNumero('ESCOLHA UM NÚMERO MÁXIMO: ');
-          partida.sorteado = Random().nextInt(partida.maximo + 1);
-          if (partida.sorteado < partida.minimo) {
-            partida.sorteado = partida.minimo;
-          }
+          partida = criacaoPartida();
           break;
 
         case 3:
@@ -52,6 +60,8 @@ void main() {
       }
     } else {
       if (sugestao == partida.sorteado) {
+        historicoPartidas.add(partida);
+
         print('');
         print('O número escolhido foi: ${partida.sorteado} ');
         print('-----------------------------------------------------');
@@ -71,7 +81,9 @@ void main() {
         print('VOCÊ DESEJA CONTINUAR? (sim/ não)');
         String resposta = stdin.readLineSync() ?? 'NÃO';
 
-        if (resposta != 'sim') {
+        if (resposta.toUpperCase() != 'SIM' &&
+            resposta.toUpperCase() != 'S' &&
+            resposta.toUpperCase() != 'SI') {
           querContinuar = false;
         }
       }

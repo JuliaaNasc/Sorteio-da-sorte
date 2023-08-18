@@ -1,24 +1,18 @@
 import 'pedir_numero.dart';
 
-int mostrarMenu() {
+int mostrarMenu(List<String> opcoes) {
   bool selecionouOpcao = false;
 
   int? opcaoSelecionada = null;
 
   while (!selecionouOpcao) {
-    print('-----------------------------------------------------');
-    print(
-        'ME DEPAREI QUE SUA RESPOSTA ESTÁ FORA DOS PARAMETROS DAS QUANTIDADES ESTABELECIDAS ANTERIORMENTE: ');
-    print('');
-    print('1 - DESEJA CONTINUAR COM OS MESMOS VALORES?: ');
-    print('2 - DESEJA REDEFINIR NOVOS VALORES?: ');
-    print('3 - DESEJA ENCERRAR O PROGRAMA?: ');
+    for (int i = 1; i <= opcoes.length; i++) {
+      print('$i - ${opcoes[i-1]}');
+    }
 
     opcaoSelecionada = pedirNumero('');
 
-    List<int> opcoes = [1, 2, 3];
-
-    if (opcoes.contains(opcaoSelecionada)) {
+    if (opcaoSelecionada > 0 && opcaoSelecionada <= opcoes.length) {
       selecionouOpcao = true;
     } else {
       print('VOCE NÃO DIGITOU UMA OPÇÃO OFERTADA !!!');
