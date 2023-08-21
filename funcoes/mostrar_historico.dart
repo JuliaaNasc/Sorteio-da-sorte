@@ -1,17 +1,17 @@
 import '../modelos/partida.dart';
 
 void mostrarHistorico(List<Partida> historico) {
-
-  print ('');
+  print('');
+  print('QUANTIDADE DE PARTIDAS: ${historico.length}');
   for (Partida partida in historico) {
     print('---------------------------------------------------------------');
 
+    print('NOME DO USUÁRIO: ${partida.nomeUsuario}');
     print('MÍNIMO: ${partida.minimo}');
     print('MÁXIMO: ${partida.maximo}');
-    print('SORTEADO: ${partida.sorteado}');
     print('NÚMERO DE SUGESTÕES: ${partida.numerosSugeridos.length}');
-    print('NOME DO USUÁRIO: ${partida.nomeUsuario}');
+    print('SORTEADO: ${partida.sorteado}');
   }
-    print('---------------------------------------------------------------');
-    print('');
+  print('---------------------------------------------------------------');
+  print('');
 }
