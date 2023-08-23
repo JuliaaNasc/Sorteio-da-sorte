@@ -6,9 +6,10 @@ import 'funcoes/pedir_numero.dart';
 import 'modelos/partida.dart';
 
 void main() {
-  print('VENHA PARTICIPAR DA NOSSA BRINCADEIRA... ');
+  print('VENHA PARTICIPAR DA NOSSA BRINCADEIRA...');   
   print('-----------------------------------------------------');
   print('');
+
 
   List<Partida> historicoPartidas = [];
 
